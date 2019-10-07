@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         recipeList.add(
                 new Recipe(
                         1,
-                        "Test",
+                        "Veganer Burger mit Karotten und Hummus",
                         "Test",
                         1,
                         1,
@@ -93,6 +93,19 @@ public class MainActivity extends AppCompatActivity {
         adapter = new RecipeAdapter(this, recipeList);
         recyclerView.setAdapter(adapter);
 
+        adapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                changeItem(position, "Clicked");
+                adapter.notifyItemChanged(position);
+            }
+        });
+
 
     }
+
+    public void changeItem(int position, String text) {
+        recipeList.get(position).changeTitle(text);
+    }
+
 }

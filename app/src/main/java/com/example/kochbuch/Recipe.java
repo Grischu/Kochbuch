@@ -22,6 +22,10 @@ public class Recipe {
         this.image = image;
     }
 
+    public void changeTitle(String text) {
+        title = text;
+    }
+
     public int getId() {
         return id;
     }
