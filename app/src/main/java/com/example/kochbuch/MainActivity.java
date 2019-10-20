@@ -1,5 +1,6 @@
 package com.example.kochbuch;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -93,13 +94,16 @@ public class MainActivity extends AppCompatActivity {
         adapter = new RecipeAdapter(this, recipeList);
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
+       /* adapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                changeItem(position, "Clicked");
-                adapter.notifyItemChanged(position);
+                /*changeItem(position, "Clicked");
+                adapter.notifyItemChanged(position);*/ /*
+                Intent myIntent = new Intent(MainActivity.this, RecipeViewActivity.class);
+
+                startActivity(myIntent);
             }
-        });
+        });*/
 
 
     }

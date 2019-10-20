@@ -1,6 +1,7 @@
 package com.example.kochbuch;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -37,7 +38,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     public RecipeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.list_layout, null);
-        RecipeViewHolder recipeViewHolder = new RecipeViewHolder(view, mListener);
         return new RecipeViewHolder(view, mListener);
     }
 
@@ -69,12 +69,20 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (listener != null) {
+                    /*if (listener != null) {
                         int position = getAdapterPosition();
                         if(position != RecyclerView.NO_POSITION) {
                             listener.onItemClick(position);
-                        }
-                    }
+                        }*/
+
+
+                        Intent intent = new Intent(context, RecipeViewActivity.class);
+
+                        //intent.putExtra("image_url", imageView.get(position));
+
+                        context.startActivity(intent);
+
+                   // }
                 }
             });
         }
