@@ -1,115 +1,42 @@
 package com.example.kochbuch;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private RecipeAdapter adapter;
 
-    List<Recipe> recipeList;
+
+
+    private RecipeViewModel recipeViewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        recipeList = new ArrayList<>();
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-        recipeList.add(
-                new Recipe(
-                        1,
-                        "Veganer Burger mit Karotten und Hummus",
-                        "Test",
-                        1,
-                        1,
-                        new ArrayList<String>(),
-                        R.drawable.testpicture));
-        recipeList.add(
-                new Recipe(
-                        1,
-                        "Test",
-                        "Test",
-                        1,
-                        1,
-                        new ArrayList<String>(),
-                        R.drawable.testpicture));
-        recipeList.add(
-                new Recipe(
-                        1,
-                        "Test",
-                        "Test",
-                        1,
-                        1,
-                        new ArrayList<String>(),
-                        R.drawable.testpicture));
-        recipeList.add(
-                new Recipe(
-                        1,
-                        "Test",
-                        "Test",
-                        1,
-                        1,
-                        new ArrayList<String>(),
-                        R.drawable.testpicture));
-        recipeList.add(
-                new Recipe(
-                        1,
-                        "Test",
-                        "Test",
-                        1,
-                        1,
-                        new ArrayList<String>(),
-                        R.drawable.testpicture));
-        recipeList.add(
-                new Recipe(
-                        1,
-                        "Test",
-                        "Test",
-                        1,
-                        1,
-                        new ArrayList<String>(),
-                        R.drawable.testpicture));
-        recipeList.add(
-                new Recipe(
-                        1,
-                        "Test",
-                        "Test",
-                        1,
-                        1,
-                        new ArrayList<String>(),
-                        R.drawable.testpicture));
-
-
-        adapter = new RecipeAdapter(this, recipeList);
+        final RecipeAdapter adapter = new RecipeAdapter();
         recyclerView.setAdapter(adapter);
 
-       /* adapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
+
+
+        recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
+        recipeViewModel.getAllRecipes().observe(this, new Observer<List<Recipe>>() {
             @Override
-            public void onItemClick(int position) {
-                /*changeItem(position, "Clicked");
-                adapter.notifyItemChanged(position);*/ /*
-                Intent myIntent = new Intent(MainActivity.this, RecipeViewActivity.class);
-
-                startActivity(myIntent);
+            public void onChanged(@Nullable List<Recipe> recipes) {
+                adapter.setRecipe(recipes);
             }
-        });*/
-
-
-    }
-
-    public void changeItem(int position, String text) {
-        recipeList.get(position).changeTitle(text);
+        });
     }
 
 }

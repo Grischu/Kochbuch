@@ -7,17 +7,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>{
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHolder>{
 
     private Context context;
-    private List<Recipe> recipeList;
+    private List<Recipe> recipeList = new ArrayList<>();
     private OnItemClickListener mListener;
+
+    class RecipeHolder extends RecyclerView.ViewHolder {
+        private TextView textViewTitle;
+        //private TextView textViewDescription;
+        private ImageView imageView;
+
+        public RecipeHolder(View itemView) {
+            super(itemView);
+            textViewTitle = itemView.findViewById(R.id.title);
+            imageView = itemView.findViewById(R.id.image);
+        }
+    }
 
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -28,31 +40,38 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         void onItemClick(int position);
     }
 
-    public RecipeAdapter(Context context, List<Recipe> recipeList) {
-        this.context = context;
-        this.recipeList = recipeList;
-    }
+
 
     @NonNull
     @Override
-    public RecipeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.list_layout, null);
-        return new RecipeViewHolder(view, mListener);
+    public RecipeHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View inflater = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.list_layout, viewGroup, false);
+        return new RecipeHolder(inflater);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeViewHolder recipeViewHolder, int position) {
-        Recipe recipe = recipeList.get(position);
+    public void onBindViewHolder(@NonNull RecipeHolder recipeHolder, int i) {
+        Recipe recipe = recipeList.get(i);
 
-        recipeViewHolder.textViewTitle.setText(recipe.getTitle());
-        recipeViewHolder.imageView.setImageDrawable(context.getResources().getDrawable(recipe.getImage()));
+        recipeHolder.textViewTitle.setText(recipe.getTitle());
 
+
+
+
+        recipeHolder.imageView.setImageResource(recipe.getImage());
     }
+
+
 
     @Override
     public int getItemCount() {
         return recipeList.size();
+    }
+
+    public void setRecipe(List<Recipe> recipe) {
+        this.recipeList = recipe;
+        notifyDataSetChanged(); //TODO Maybe replace with more efficent
     }
 
     class RecipeViewHolder extends RecyclerView.ViewHolder {
