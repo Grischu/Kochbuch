@@ -8,7 +8,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-@Database(entities = {Recipe.class}, version = 1)
+@Database(entities = {Recipe.class}, version = 3)
 public abstract class RecipeDatabase extends RoomDatabase {
 
     private static RecipeDatabase instance;
@@ -44,42 +44,36 @@ public abstract class RecipeDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids ) {
             recipeDao.insert(new Recipe(
-                    1,
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
                     R.drawable.testpicture));
             recipeDao.insert(new Recipe(
-                    2,
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
                     R.drawable.testpicture));
             recipeDao.insert(new Recipe(
-                    3,
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
                     R.drawable.testpicture));
             recipeDao.insert(new Recipe(
-                    4,
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
                     R.drawable.testpicture));
             recipeDao.insert(new Recipe(
-                    5,
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
                     R.drawable.testpicture));
             recipeDao.insert(new Recipe(
-                    6,
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,

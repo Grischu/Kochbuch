@@ -5,28 +5,23 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class Recipe {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String title;
     private String descirption;
     private int difficulty;
     private int time;
-    //private List<String> ingredients;
+    //private List<Ingredients> ingredients;
 
     private int image;
 
-    public Recipe(int id, String title, String descirption, int difficulty, int time, int image) {
-        this.id = id;
+    public Recipe(String title, String descirption, int difficulty, int time, int image) {
         this.title = title;
         this.descirption = descirption;
         this.difficulty = difficulty;
         this.time = time;
         //this.ingredients = ingredients;
         this.image = image;
-    }
-
-    public void changeTitle(String text) {
-        title = text;
     }
 
     public int getId() {
@@ -48,10 +43,6 @@ public class Recipe {
     public int getTime() {
         return time;
     }
-
-    /*public List<String> getIngredients() {
-        return ingredients;
-    }*/
 
     public int getImage() {
         return image;
