@@ -13,34 +13,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHolder>{
-
-    private Context context;
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHolder> {
     private List<Recipe> recipeList = new ArrayList<>();
-    private OnItemClickListener mListener;
-
-    class RecipeHolder extends RecyclerView.ViewHolder {
-        private TextView textViewTitle;
-        //private TextView textViewDescription;
-        private ImageView imageView;
-
-        public RecipeHolder(View itemView) {
-            super(itemView);
-            textViewTitle = itemView.findViewById(R.id.title);
-            imageView = itemView.findViewById(R.id.image);
-        }
-    }
-
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mListener = listener;
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-
+    private OnItemClickListener listener;
+    private Context context;
 
     @NonNull
     @Override
@@ -53,16 +29,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
     @Override
     public void onBindViewHolder(@NonNull RecipeHolder recipeHolder, int i) {
         Recipe recipe = recipeList.get(i);
-
         recipeHolder.textViewTitle.setText(recipe.getTitle());
-
-
-
-
         recipeHolder.imageView.setImageResource(recipe.getImage());
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -74,38 +43,34 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
         notifyDataSetChanged(); //TODO Maybe replace with more efficent
     }
 
-    class RecipeViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imageView;
-        TextView textViewTitle, textViewDescription;
+    class RecipeHolder extends RecyclerView.ViewHolder {
+        private TextView textViewTitle;
+        private ImageView imageView;
 
-        public RecipeViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+        public RecipeHolder(View itemView) {
             super(itemView);
-
-            imageView = itemView.findViewById(R.id.image);
             textViewTitle = itemView.findViewById(R.id.title);
+            imageView = itemView.findViewById(R.id.image);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    /*if (listener != null) {
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }*/
-
-
-                        Intent intent = new Intent(context, RecipeViewActivity.class);
-
-                        //intent.putExtra("image_url", imageView.get(position));
-
-                        context.startActivity(intent);
-
-                   // }
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(recipeList.get(position));
+                    }
                 }
             });
         }
-}
+    }
 
+    public interface OnItemClickListener {
+        void onItemClick(Recipe recipe);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.listener = onItemClickListener;
+    }
 
 }

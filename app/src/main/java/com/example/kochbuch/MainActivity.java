@@ -17,6 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static final int ADD_NOTE_REQUEST = 1;
+    public static final int SHOW_NOTE_REQUEST = 2;
 
     private RecipeViewModel recipeViewModel;
 
@@ -47,6 +48,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<Recipe> recipes) {
                 adapter.setRecipe(recipes);
+            }
+        });
+
+        adapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Recipe recipe) {
+                Intent intent = new Intent(MainActivity.this, RecipeViewActivity.class);
+                //Musste mit Extra gelösst werden, da es nicht aus der DB genommen werden kann von einer Aktiven Activity
+                //"cannot access database on the main thread since it may potentially lock the UI for a long period of time."
+                intent.putExtra(RecipeViewActivity.EXTRA_TITLE, recipe.getTitle());
+                intent.putExtra(RecipeViewActivity.EXTRA_IMAGR, recipe.getImage());
+                startActivityForResult(intent, SHOW_NOTE_REQUEST);
             }
         });
     }
