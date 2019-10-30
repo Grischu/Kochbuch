@@ -30,7 +30,18 @@ public class AddRecipeActivity extends AppCompatActivity {
         editTextDescription = findViewById(R.id.editRecipeDescription);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Add Recipe");
+
+        Intent intent = getIntent();
+        if(intent.hasExtra("Recipe")) {
+            Recipe recipe = (Recipe) intent.getSerializableExtra("Recipe");
+            editTextTitle.setText(recipe.getTitle());
+            editTextDescription.setText(recipe.getDescirption());
+
+            setTitle("Edit Recipe");
+        } else {
+            setTitle("Add Recipe");
+        }
+
     }
 
     private void saveRecipe() {
@@ -44,6 +55,13 @@ public class AddRecipeActivity extends AppCompatActivity {
         }
 
         Intent data = new Intent();
+        if(getIntent().hasExtra("Recipe")) {
+            Recipe recipe = (Recipe) getIntent().getSerializableExtra("Recipe");
+            recipe.setTitle(title);
+            recipe.setDescirption(description);
+            data.putExtra("Recipe", recipe);
+        }
+
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
 

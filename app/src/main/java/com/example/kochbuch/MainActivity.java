@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int ADD_NOTE_REQUEST = 1;
     public static final int SHOW_NOTE_REQUEST = 2;
+    public static final int EDIT_NOTE_REQUEST = 3;
 
     private RecipeViewModel recipeViewModel;
 
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 //"cannot access database on the main thread since it may potentially lock the UI for a long period of time."
                 intent.putExtra(RecipeViewActivity.EXTRA_TITLE, recipe.getTitle());
                 intent.putExtra(RecipeViewActivity.EXTRA_IMAGR, recipe.getImage());
+                intent.putExtra("Recipe", recipe);
                 startActivityForResult(intent, SHOW_NOTE_REQUEST);
             }
         });
@@ -76,7 +78,13 @@ public class MainActivity extends AppCompatActivity {
             recipeViewModel.insert(recipe);
 
             Toast.makeText(this, "Recipe saved", Toast.LENGTH_SHORT).show();
-        } else {
+        } /*else if(requestCode == EDIT_NOTE_REQUEST && resultCode == RESULT_OK) {
+
+            Recipe recipe = (Recipe) data.getSerializableExtra("Recipe");
+            recipeViewModel.update(recipe);
+            Toast.makeText(this, "Recipe updated", Toast.LENGTH_SHORT).show();
+
+        } */else {
             Toast.makeText(this, "Recipe not saved", Toast.LENGTH_SHORT).show();
         }
     }
