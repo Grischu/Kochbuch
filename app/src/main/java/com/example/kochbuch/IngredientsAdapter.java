@@ -12,47 +12,52 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.RecipeHolder> {
-    private List<Recipe> recipeList = new ArrayList<>();
+public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.IngredientsHolder> {
+    private List<String> name;
     private OnItemClickListener listener;
     private Context context;
 
+    public IngredientsAdapter(List<String> dataSet) {
+        name = dataSet;
+    }
+
     @NonNull
     @Override
-    public RecipeHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public IngredientsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View inflater = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.list_layout, viewGroup, false);
-        return new RecipeHolder(inflater);
+                .inflate(R.layout.ingredients_layout, viewGroup, false);
+        return new IngredientsHolder(inflater);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeHolder recipeHolder, int i) {
-        Recipe recipe = recipeList.get(i);
-        recipeHolder.textViewTitle.setText(recipe.getTitle());
-        recipeHolder.imageView.setImageResource(recipe.getImage());
+    public void onBindViewHolder(@NonNull IngredientsHolder recipeHolder, int i) {
+        //Recipe recipe = recipeList.get(i);
+        String ingredients = name.get(i);
+        recipeHolder.textViewName.setText(ingredients);
+        //recipeHolder.imageView.setImageResource(recipe.getImage());
     }
 
     @Override
     public int getItemCount() {
-        return recipeList.size();
+        return name.size();
     }
 
-    public void setRecipe(List<Recipe> recipe) {
+    /*public void setRecipe(List<Recipe> recipe) {
         this.recipeList = recipe;
         notifyDataSetChanged(); //TODO Maybe replace with more efficent
-    }
+    }*/
 
 
-    class RecipeHolder extends RecyclerView.ViewHolder {
-        private TextView textViewTitle;
-        private ImageView imageView;
+    class IngredientsHolder extends RecyclerView.ViewHolder {
+        private TextView textViewName;
+        //private ImageView imageView;
 
-        public RecipeHolder(View itemView) {
+        public IngredientsHolder(View itemView) {
             super(itemView);
-            textViewTitle = itemView.findViewById(R.id.title);
-            imageView = itemView.findViewById(R.id.image);
+            textViewName = itemView.findViewById(R.id.name);
+            //imageView = itemView.findViewById(R.id.image);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            /*itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
@@ -60,7 +65,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
                         listener.onItemClick(recipeList.get(position));
                     }
                 }
-            });
+            });*/
         }
     }
 

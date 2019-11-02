@@ -2,8 +2,10 @@ package com.example.kochbuch;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Recipe implements Serializable {
@@ -13,17 +15,18 @@ public class Recipe implements Serializable {
     private String descirption;
     private int difficulty;
     private int time;
-    //private List<Ingredients> ingredients;
+    @TypeConverters(IngredientsConverter.class)
+    private Ingredients ingredients;
 
     private int image;
 
-    public Recipe(String title, String descirption, int difficulty, int time, int image) {
+    public Recipe(String title, String descirption, int difficulty, int time, int image, Ingredients ingredients) {
         this.title = title;
         this.descirption = descirption;
         this.difficulty = difficulty;
         this.time = time;
-        //this.ingredients = ingredients;
         this.image = image;
+        this.ingredients = ingredients;
     }
 
     public int getId() {
@@ -72,5 +75,13 @@ public class Recipe implements Serializable {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public Ingredients getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Ingredients ingredients) {
+        this.ingredients = ingredients;
     }
 }

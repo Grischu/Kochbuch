@@ -1,12 +1,26 @@
 package com.example.kochbuch;
 
-public class Ingredients {
+import java.io.Serializable;
+import java.util.List;
 
-    private int id;
-    private String name;
-    private int amount;
-    private String unit;
+public class Ingredients implements Serializable {
 
+    //private int id;
+    private List<String> name;
+    //private List<Integer> amount;
+    //private List<String>String;
+
+    public Ingredients(List<String> name) {
+        this.name = name;
+    }
+
+    public List<java.lang.String> getName() {
+        return name;
+    }
+
+    public void setName(List<java.lang.String> name) {
+        this.name = name;
+    }
 
 
 }

@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -74,7 +75,12 @@ public class MainActivity extends AppCompatActivity {
             String title = data.getStringExtra(AddRecipeActivity.EXTRA_TITLE); //Should never be null
             String description = data.getStringExtra(AddRecipeActivity.EXTRA_DESCRIPTION);
 
-            Recipe recipe = new Recipe(title, description, 2,2,R.drawable.testpicture); //TODO Picture Uploader
+            List<String> ingredientsList = new ArrayList<String>();
+            ingredientsList.add("Hallo");
+            ingredientsList.add("Bro");
+            Ingredients ingredients = new Ingredients(ingredientsList);
+
+            Recipe recipe = new Recipe(title, description, 2,2,R.drawable.testpicture, ingredients); //TODO Picture Uploader
             recipeViewModel.insert(recipe);
 
             Toast.makeText(this, "Recipe saved", Toast.LENGTH_SHORT).show();
