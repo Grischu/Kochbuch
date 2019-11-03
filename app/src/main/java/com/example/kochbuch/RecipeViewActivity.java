@@ -40,7 +40,7 @@ public class RecipeViewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if (intent.hasExtra(EXTRA_TITLE)) {
+        if (intent.hasExtra("Recipe")) {
 
 
             recipe = (Recipe) intent.getSerializableExtra("Recipe");
@@ -100,8 +100,11 @@ public class RecipeViewActivity extends AppCompatActivity {
             recipeViewModel.update(recipe);
             Toast.makeText(this, "Recipe updated", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, RecipeViewActivity.class);
+            intent.putExtra("Recipe", recipe);
             startActivityForResult(intent, MainActivity.SHOW_NOTE_REQUEST);
+
+            startActivity(intent);
 
         } else {
             Toast.makeText(this, "Recipe not saved", Toast.LENGTH_SHORT).show();

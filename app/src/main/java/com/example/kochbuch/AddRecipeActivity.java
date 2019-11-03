@@ -2,7 +2,10 @@ package com.example.kochbuch;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,14 +23,21 @@ public class AddRecipeActivity extends AppCompatActivity {
 
     private EditText editTextTitle;
     private EditText editTextDescription;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
 
+        recyclerView = findViewById(R.id.ingredients_recycler_view);
+
         editTextTitle = findViewById(R.id.editRecipeTitle);
         editTextDescription = findViewById(R.id.editRecipeDescription);
+
+        FloatingActionButton addIngredientsButton = findViewById(R.id.addIngredientsButton);
+
+
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
 
@@ -36,6 +46,12 @@ public class AddRecipeActivity extends AppCompatActivity {
             Recipe recipe = (Recipe) intent.getSerializableExtra("Recipe");
             editTextTitle.setText(recipe.getTitle());
             editTextDescription.setText(recipe.getDescirption());
+
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+            final IngredientsAdapter adapter = new IngredientsAdapter(recipe.getRecipeIngredients().getIngredientsList());
+            recyclerView.setAdapter(adapter);
 
             setTitle("Edit Recipe");
         } else {

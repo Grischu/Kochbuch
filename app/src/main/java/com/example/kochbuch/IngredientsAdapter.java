@@ -3,10 +3,12 @@ package com.example.kochbuch;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import java.util.List;
 
@@ -22,21 +24,22 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     @NonNull
     @Override
     public IngredientsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View inflater = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.ingredients_layout, viewGroup, false);
-        return new IngredientsHolder(inflater);
+        View inflater;
+        inflater = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.ingredients_layout_edit, viewGroup, false);
+        if(viewGroup.getContext() instanceof RecipeViewActivity) {
+            return new IngredientsHolder(inflater, true);
+        }
+        return new IngredientsHolder(inflater, false);
     }
 
     @Override
     public void onBindViewHolder(@NonNull IngredientsHolder recipeHolder, int i) {
-        //Recipe recipe = recipeList.get(i);
         Ingredients ingredients = name.get(i);
 
-
-        recipeHolder.textViewName.setText(ingredients.getName());
-        recipeHolder.textViewAmount.setText(String.valueOf(ingredients.getAmount()));
-        recipeHolder.textViewUnit.setText(ingredients.getUnit());
-        //recipeHolder.imageView.setImageResource(recipe.getImage());
+        recipeHolder.editTextName.setText(ingredients.getName());
+        recipeHolder.editTextAmount.setText(String.valueOf(ingredients.getAmount()));
+        recipeHolder.editTextUnit.setText(ingredients.getUnit());
     }
 
     @Override
@@ -51,30 +54,86 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
 
     class IngredientsHolder extends RecyclerView.ViewHolder {
-        private TextView textViewName;
-        private TextView textViewAmount;
-        private TextView textViewUnit;
+        private EditText editTextName;
+        private EditText editTextAmount;
+        private EditText editTextUnit;
         //private ImageView imageView;
 
-        public IngredientsHolder(View itemView) {
+        public IngredientsHolder(View itemView, boolean disabled) {
             super(itemView);
-            textViewName = itemView.findViewById(R.id.name);
-            textViewAmount = itemView.findViewById(R.id.amount);
-            textViewUnit = itemView.findViewById(R.id.unit);
 
-            //imageView = itemView.findViewById(R.id.image);
+            editTextName = (EditText) itemView.findViewById(R.id.name);
+            editTextAmount = (EditText) itemView.findViewById(R.id.amount);
+            editTextUnit = (EditText) itemView.findViewById(R.id.unit);
 
-            /*itemView.setOnClickListener(new View.OnClickListener() {
+            editTextName.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (listener != null && position != RecyclerView.NO_POSITION) {
-                        listener.onItemClick(recipeList.get(position));
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    name.get(getAdapterPosition()).setName(editTextName.getText().toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+
+            editTextAmount.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    if(!editTextAmount.getText().toString().equals("")) {
+                        name.get(getAdapterPosition()).setAmount(Integer.parseInt(editTextAmount.getText().toString()));
                     }
                 }
-            });*/
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+
+            editTextUnit.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    name.get(getAdapterPosition()).setUnit(editTextUnit.getText().toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+            if(disabled) {
+                editTextName.setEnabled(false);
+                editTextAmount.setEnabled(false);
+                editTextUnit.setEnabled(false);
+            } else {
+                editTextName.setEnabled(true);
+                editTextAmount.setEnabled(true);
+                editTextUnit.setEnabled(true);
+            }
+
         }
     }
+
+
 
     public interface OnItemClickListener {
         void onItemClick(Recipe recipe);
@@ -82,6 +141,14 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.listener = onItemClickListener;
+    }
+
+    public List<Ingredients> getName() {
+        return name;
+    }
+
+    public void setName(List<Ingredients> name) {
+        this.name = name;
     }
 
 }
