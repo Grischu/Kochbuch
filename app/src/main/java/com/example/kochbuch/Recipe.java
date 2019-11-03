@@ -5,7 +5,6 @@ import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 public class Recipe implements Serializable {
@@ -16,17 +15,17 @@ public class Recipe implements Serializable {
     private int difficulty;
     private int time;
     @TypeConverters(IngredientsConverter.class)
-    private Ingredients ingredients;
+    private RecipeIngredients recipeIngredients;
 
     private int image;
 
-    public Recipe(String title, String descirption, int difficulty, int time, int image, Ingredients ingredients) {
+    public Recipe(String title, String descirption, int difficulty, int time, int image, RecipeIngredients recipeIngredients) {
         this.title = title;
         this.descirption = descirption;
         this.difficulty = difficulty;
         this.time = time;
         this.image = image;
-        this.ingredients = ingredients;
+        this.recipeIngredients = recipeIngredients;
     }
 
     public int getId() {
@@ -77,11 +76,11 @@ public class Recipe implements Serializable {
         this.image = image;
     }
 
-    public Ingredients getIngredients() {
-        return ingredients;
+    public RecipeIngredients getRecipeIngredients() {
+        return recipeIngredients;
     }
 
-    public void setIngredients(Ingredients ingredients) {
-        this.ingredients = ingredients;
+    public void setRecipeIngredients(RecipeIngredients recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 }

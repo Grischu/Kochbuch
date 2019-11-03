@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Database(entities = {Recipe.class}, version = 4)
+@Database(entities = {Recipe.class}, version = 21)
 public abstract class RecipeDatabase extends RoomDatabase {
 
     private static RecipeDatabase instance;
@@ -46,49 +46,59 @@ public abstract class RecipeDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids ) {
-            List<String> ingredients = new ArrayList<String>();
-            ingredients.add("asdf");
-            ingredients.add("asdf2");
 
-            Ingredients ingredients1 = new Ingredients(ingredients);
-            //ingredients1.setName(ingredients);
+            List<Ingredients> ingredientsList = new ArrayList<>();
+            Ingredients ingredients = new Ingredients();
+            ingredients.setName("Mehl");
+            ingredients.setAmount(1);
+            ingredients.setUnit("KG");
+
+            Ingredients ingredients2 = new Ingredients();
+            ingredients.setName("Pluver");
+            ingredients.setAmount(4);
+            ingredients.setUnit("Liter");
+
+            ingredientsList.add(ingredients);
+            ingredientsList.add(ingredients2);
+
+            RecipeIngredients recipeIngredients = new RecipeIngredients(ingredientsList);
 
             recipeDao.insert(new Recipe(
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
-                    R.drawable.testpicture, ingredients1));
+                    R.drawable.testpicture, recipeIngredients));
             recipeDao.insert(new Recipe(
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
-                    R.drawable.testpicture, ingredients1));
+                    R.drawable.testpicture, recipeIngredients));
             recipeDao.insert(new Recipe(
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
-                    R.drawable.testpicture, ingredients1));
+                    R.drawable.testpicture, recipeIngredients));
             recipeDao.insert(new Recipe(
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
-                    R.drawable.testpicture, ingredients1));
+                    R.drawable.testpicture, recipeIngredients));
             recipeDao.insert(new Recipe(
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
-                    R.drawable.testpicture, ingredients1));
+                    R.drawable.testpicture, recipeIngredients));
             recipeDao.insert(new Recipe(
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
-                    R.drawable.testpicture, ingredients1));
+                    R.drawable.testpicture, recipeIngredients));
             return null;
         }
     }

@@ -1,26 +1,36 @@
 package com.example.kochbuch;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Ingredients implements Serializable {
 
-    //private int id;
-    private List<String> name;
-    //private List<Integer> amount;
-    //private List<String>String;
+    //private IngredientsType ingredientsType;
+    private int amount;
 
-    public Ingredients(List<String> name) {
-        this.name = name;
+    private String name; //TODO in IngredientsType auslagern mit stammdaten für dropdown
+    private String unit; //TODO in IngredientsType auslagern mit stammdaten für dropdown
+
+    public int getAmount() {
+        return amount;
     }
 
-    public List<java.lang.String> getName() {
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public void setName(List<java.lang.String> name) {
+    public void setName(String name) {
         this.name = name;
     }
 
+    public String getUnit() {
+        return unit;
+    }
 
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 }

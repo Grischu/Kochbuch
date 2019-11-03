@@ -6,18 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.IngredientsHolder> {
-    private List<String> name;
+    private List<Ingredients> name;
     private OnItemClickListener listener;
     private Context context;
 
-    public IngredientsAdapter(List<String> dataSet) {
+    public IngredientsAdapter(List<Ingredients> dataSet) {
         name = dataSet;
     }
 
@@ -32,7 +30,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     @Override
     public void onBindViewHolder(@NonNull IngredientsHolder recipeHolder, int i) {
         //Recipe recipe = recipeList.get(i);
-        String ingredients = name.get(i);
+        String ingredients = name.get(i).getName();
         recipeHolder.textViewName.setText(ingredients);
         //recipeHolder.imageView.setImageResource(recipe.getImage());
     }

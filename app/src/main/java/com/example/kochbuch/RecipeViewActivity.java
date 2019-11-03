@@ -58,7 +58,7 @@ public class RecipeViewActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        final IngredientsAdapter adapter = new IngredientsAdapter(recipe.getIngredients().getName());
+        final IngredientsAdapter adapter = new IngredientsAdapter(recipe.getRecipeIngredients().getIngredientsList());
         recyclerView.setAdapter(adapter);
     }
 

@@ -75,12 +75,37 @@ public class MainActivity extends AppCompatActivity {
             String title = data.getStringExtra(AddRecipeActivity.EXTRA_TITLE); //Should never be null
             String description = data.getStringExtra(AddRecipeActivity.EXTRA_DESCRIPTION);
 
-            List<String> ingredientsList = new ArrayList<String>();
-            ingredientsList.add("Hallo");
-            ingredientsList.add("Bro");
-            Ingredients ingredients = new Ingredients(ingredientsList);
+            List<Ingredients> ingredientsList = new ArrayList<>();
+            Ingredients ingredients = new Ingredients();
+            ingredients.setName("Mehl");
+            ingredients.setAmount(1);
+            ingredients.setUnit("KG");
+            Ingredients ingredients1 = new Ingredients();
+            ingredients1.setName("Mehl");
+            ingredients1.setAmount(1);
+            ingredients1.setUnit("KG");
+            Ingredients ingredients2 = new Ingredients();
+            ingredients2.setName("Mehl");
+            ingredients2.setAmount(1);
+            ingredients2.setUnit("KG");
+            Ingredients ingredients3 = new Ingredients();
+            ingredients3.setName("Mehl");
+            ingredients3.setAmount(1);
+            ingredients3.setUnit("KG");
+            Ingredients ingredients4 = new Ingredients();
+            ingredients4.setName("Mehl");
+            ingredients4.setAmount(1);
+            ingredients4.setUnit("KG");
 
-            Recipe recipe = new Recipe(title, description, 2,2,R.drawable.testpicture, ingredients); //TODO Picture Uploader
+            ingredientsList.add(ingredients);
+            ingredientsList.add(ingredients1);
+            ingredientsList.add(ingredients2);
+            ingredientsList.add(ingredients3);
+            ingredientsList.add(ingredients4);
+
+            RecipeIngredients recipeIngredients = new RecipeIngredients(ingredientsList);
+
+            Recipe recipe = new Recipe(title, description, 2,2,R.drawable.testpicture, recipeIngredients); //TODO Picture Uploader
             recipeViewModel.insert(recipe);
 
             Toast.makeText(this, "Recipe saved", Toast.LENGTH_SHORT).show();
