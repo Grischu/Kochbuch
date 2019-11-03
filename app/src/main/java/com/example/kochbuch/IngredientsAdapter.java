@@ -30,8 +30,12 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     @Override
     public void onBindViewHolder(@NonNull IngredientsHolder recipeHolder, int i) {
         //Recipe recipe = recipeList.get(i);
-        String ingredients = name.get(i).getName();
-        recipeHolder.textViewName.setText(ingredients);
+        Ingredients ingredients = name.get(i);
+
+
+        recipeHolder.textViewName.setText(ingredients.getName());
+        recipeHolder.textViewAmount.setText(String.valueOf(ingredients.getAmount()));
+        recipeHolder.textViewUnit.setText(ingredients.getUnit());
         //recipeHolder.imageView.setImageResource(recipe.getImage());
     }
 
@@ -48,11 +52,16 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     class IngredientsHolder extends RecyclerView.ViewHolder {
         private TextView textViewName;
+        private TextView textViewAmount;
+        private TextView textViewUnit;
         //private ImageView imageView;
 
         public IngredientsHolder(View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.name);
+            textViewAmount = itemView.findViewById(R.id.amount);
+            textViewUnit = itemView.findViewById(R.id.unit);
+
             //imageView = itemView.findViewById(R.id.image);
 
             /*itemView.setOnClickListener(new View.OnClickListener() {

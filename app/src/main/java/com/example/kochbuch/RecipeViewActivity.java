@@ -33,6 +33,7 @@ public class RecipeViewActivity extends AppCompatActivity {
 
 
         TextView textTitle = findViewById(R.id.recipeTitle);
+        TextView textDescription = findViewById(R.id.recipeDesc);
         ImageView image = findViewById(R.id.recipeImage);
 
         recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
@@ -45,6 +46,7 @@ public class RecipeViewActivity extends AppCompatActivity {
             recipe = (Recipe) intent.getSerializableExtra("Recipe");
 
             textTitle.setText(recipe.getTitle());
+            textDescription.setText(recipe.getDescirption());
 
 
             image.setImageResource(recipe.getImage());
