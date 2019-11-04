@@ -5,16 +5,16 @@ import java.io.Serializable;
 public class Ingredients implements Serializable {
 
     //private IngredientsType ingredientsType;
-    private int amount;
+    private double amount;
 
     private String name; //TODO in IngredientsType auslagern mit stammdaten für dropdown
     private String unit; //TODO in IngredientsType auslagern mit stammdaten für dropdown
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 

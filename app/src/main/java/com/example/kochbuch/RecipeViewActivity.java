@@ -94,8 +94,7 @@ public class RecipeViewActivity extends AppCompatActivity {
                         }
 
                         amount = (amount / temporaryNumber) * (int) dropDown.getItemAtPosition(position);
-                        ingredients.setAmount((int) Math.floor(amount));
-                        //TODO Mit Double rechnen und abspeichern
+                        ingredients.setAmount(Math.round(amount * 10) / 10.0);
 
                     }
                     temporaryNumber = (int) dropDown.getItemAtPosition(position);

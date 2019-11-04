@@ -16,7 +16,7 @@ public class IngredientsConverter {
         for(int i = 0; i < ingredientsString.size(); i+=3) {
             Ingredients ingredients = new Ingredients();
             ingredients.setName(ingredientsString.get(i));
-            ingredients.setAmount(Integer.parseInt(ingredientsString.get(i+1)));
+            ingredients.setAmount(Double.parseDouble(ingredientsString.get(i+1)));
             ingredients.setUnit(ingredientsString.get(i+2));
             ingredientsList.add(ingredients);
         }

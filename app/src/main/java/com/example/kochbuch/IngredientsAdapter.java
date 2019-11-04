@@ -95,7 +95,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     if(!editTextAmount.getText().toString().equals("")) {
-                        name.get(getAdapterPosition()).setAmount(Integer.parseInt(editTextAmount.getText().toString()));
+                        name.get(getAdapterPosition()).setAmount(Double.parseDouble(editTextAmount.getText().toString()));
                     }
                 }
 
