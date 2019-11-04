@@ -10,9 +10,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class RecipeViewActivity extends AppCompatActivity {
 
@@ -26,15 +32,25 @@ public class RecipeViewActivity extends AppCompatActivity {
     public static final String EXTRA_IMAGR =
             "com.example.kochbuch.EXTRA_IMAGE";
 
+    int check = 0;
+    Spinner dropDown;
+    int temporaryNumber;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_view);
-
+        temporaryNumber = 0;
 
         TextView textTitle = findViewById(R.id.recipeTitle);
         TextView textDescription = findViewById(R.id.recipeDesc);
         ImageView image = findViewById(R.id.recipeImage);
+        dropDown = findViewById(R.id.numberSpinner);
+        Integer[] items = new Integer[]{1, 2, 3, 4, 5, 6};
+        ArrayAdapter<Integer> dropDownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropDown.setAdapter(dropDownAdapter);
+
 
         recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
 
@@ -50,18 +66,60 @@ public class RecipeViewActivity extends AppCompatActivity {
 
 
             image.setImageResource(recipe.getImage());
+            dropDown.setSelection(getIndex(dropDown, recipe.getNumber()));
         }
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Recipe");
 
 
-        RecyclerView recyclerView = findViewById(R.id.ingredients_recycler_view);
+        final RecyclerView recyclerView = findViewById(R.id.ingredients_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         final IngredientsAdapter adapter = new IngredientsAdapter(recipe.getRecipeIngredients().getIngredientsList());
         recyclerView.setAdapter(adapter);
+
+        dropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+                if(++check > 1) {
+                    List<Ingredients> ingredientsList = adapter.getName();
+                    for(Ingredients ingredients : ingredientsList) {
+
+                        double amount = ingredients.getAmount();
+                        if(temporaryNumber == 0) {
+                            temporaryNumber = recipe.getNumber();
+                        }
+
+                        amount = (amount / temporaryNumber) * (int) dropDown.getItemAtPosition(position);
+                        ingredients.setAmount((int) Math.floor(amount));
+                        //TODO Mit Double rechnen und abspeichern
+
+                    }
+                    temporaryNumber = (int) dropDown.getItemAtPosition(position);
+                    adapter.setName(ingredientsList);
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+
+        });
+
+    }
+
+    private int getIndex(Spinner spinner, int number){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(number)){
+                return i;
+            }
+        }
+
+        return 0;
     }
 
     @Override

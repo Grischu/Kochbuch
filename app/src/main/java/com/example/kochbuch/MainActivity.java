@@ -73,9 +73,10 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK) {
             String title = data.getStringExtra(AddRecipeActivity.EXTRA_TITLE); //Should never be null
             String description = data.getStringExtra(AddRecipeActivity.EXTRA_DESCRIPTION);
+            int number = data.getIntExtra(AddRecipeActivity.EXTRA_NUMBER, 1);
             RecipeIngredients recipeIngredients = (RecipeIngredients) data.getSerializableExtra("RecipeIngredients");
 
-            Recipe recipe = new Recipe(title, description, 2,2,R.drawable.testpicture, recipeIngredients); //TODO Picture Uploader
+            Recipe recipe = new Recipe(title, description, 2,2,R.drawable.testpicture, number, recipeIngredients); //TODO Picture Uploader
             recipeViewModel.insert(recipe);
 
             Toast.makeText(this, "Recipe saved", Toast.LENGTH_SHORT).show();

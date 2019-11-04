@@ -16,16 +16,18 @@ public class Recipe implements Serializable {
     private int time;
     @TypeConverters(IngredientsConverter.class)
     private RecipeIngredients recipeIngredients;
+    private int number;
 
     private int image;
 
-    public Recipe(String title, String descirption, int difficulty, int time, int image, RecipeIngredients recipeIngredients) {
+    public Recipe(String title, String descirption, int difficulty, int time, int image, int number, RecipeIngredients recipeIngredients) {
         this.title = title;
         this.descirption = descirption;
         this.difficulty = difficulty;
         this.time = time;
         this.image = image;
         this.recipeIngredients = recipeIngredients;
+        this.number = number;
     }
 
     public int getId() {
@@ -82,5 +84,13 @@ public class Recipe implements Serializable {
 
     public void setRecipeIngredients(RecipeIngredients recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

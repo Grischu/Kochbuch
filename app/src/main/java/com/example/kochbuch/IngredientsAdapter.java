@@ -174,4 +174,9 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         this.name = name;
     }
 
+    //TODO irgendwas, dass nach der mengenänderung und dann beim edit klick die werte nicht übernommen werden
+    /*public void setAmount(int amount) {
+        RecipeHolder.editTextAmount.setText(String.valueOf(ingredients.getAmount()));
+    }*/
+
 }

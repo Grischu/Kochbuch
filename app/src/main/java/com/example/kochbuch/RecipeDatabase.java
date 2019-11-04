@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Database(entities = {Recipe.class}, version = 22)
+@Database(entities = {Recipe.class}, version = 24)
 public abstract class RecipeDatabase extends RoomDatabase {
 
     private static RecipeDatabase instance;
@@ -68,37 +68,37 @@ public abstract class RecipeDatabase extends RoomDatabase {
                     "Test",
                     1,
                     1, //TODO Ingredients
-                    R.drawable.testpicture, recipeIngredients));
+                    R.drawable.testpicture, 1,recipeIngredients));
             recipeDao.insert(new Recipe(
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
-                    R.drawable.testpicture, recipeIngredients));
+                    R.drawable.testpicture, 1,recipeIngredients));
             recipeDao.insert(new Recipe(
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
-                    R.drawable.testpicture, recipeIngredients));
+                    R.drawable.testpicture,1, recipeIngredients));
             recipeDao.insert(new Recipe(
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
-                    R.drawable.testpicture, recipeIngredients));
+                    R.drawable.testpicture,1, recipeIngredients));
             recipeDao.insert(new Recipe(
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
-                    R.drawable.testpicture, recipeIngredients));
+                    R.drawable.testpicture,1, recipeIngredients));
             recipeDao.insert(new Recipe(
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
                     1, //TODO Ingredients
-                    R.drawable.testpicture, recipeIngredients));
+                    R.drawable.testpicture,1, recipeIngredients));
             return null;
         }
     }

@@ -10,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,10 +26,14 @@ public class AddRecipeActivity extends AppCompatActivity {
     public static final String EXTRA_DESCRIPTION =
             "com.example.kochbuch.EXTRA_DESCRIPTION";
 
+    public static final String EXTRA_NUMBER =
+            "com.example.kochbuch.NUMBER";
+
 
     private EditText editTextTitle;
     private EditText editTextDescription;
     RecyclerView recyclerView;
+    private Spinner dropDown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,10 @@ public class AddRecipeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.ingredients_recycler_view);
         editTextTitle = findViewById(R.id.editRecipeTitle);
         editTextDescription = findViewById(R.id.editRecipeDescription);
+        dropDown = findViewById(R.id.numberSpinner);
+        Integer[] items = new Integer[]{1, 2, 3, 4, 5, 6};
+        ArrayAdapter<Integer> dropDownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropDown.setAdapter(dropDownAdapter);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
 
@@ -45,6 +55,7 @@ public class AddRecipeActivity extends AppCompatActivity {
             Recipe recipe = (Recipe) intent.getSerializableExtra("Recipe");
             editTextTitle.setText(recipe.getTitle());
             editTextDescription.setText(recipe.getDescirption());
+            dropDown.setSelection(getIndex(dropDown, recipe.getNumber()));
 
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -79,6 +90,8 @@ public class AddRecipeActivity extends AppCompatActivity {
     private void saveRecipe() {
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
+        int number = (Integer) dropDown.getSelectedItem();
+        String string = dropDown.getSelectedItem().toString();
         IngredientsAdapter adapter = (IngredientsAdapter) recyclerView.getAdapter();
         List<Ingredients> ingredients = new ArrayList<>();
         if(adapter != null) {
@@ -101,15 +114,27 @@ public class AddRecipeActivity extends AppCompatActivity {
             Recipe recipe = (Recipe) getIntent().getSerializableExtra("Recipe");
             recipe.setTitle(title);
             recipe.setDescirption(description);
+            recipe.setNumber(number);
             data.putExtra("Recipe", recipe);
         }
 
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
+        data.putExtra(EXTRA_NUMBER, number);
         data.putExtra("RecipeIngredients", recipeIngredients);
 
         setResult(RESULT_OK, data);
         finish();
+    }
+
+    private int getIndex(Spinner spinner, int number){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(number)){
+                return i;
+            }
+        }
+
+        return 0;
     }
 
     @Override
