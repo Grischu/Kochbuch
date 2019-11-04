@@ -43,18 +43,16 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addIngredientsButton"
-        android:layout_width="38dp"
-        android:layout_height="40dp"
+        android:layout_width="68dp"
+        android:layout_height="56dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="8dp"
-        android:src="@android:drawable/ic_input_add"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.981"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingredients_recycler_view"
-        app:layout_constraintVertical_bias="0.0" />
+        app:srcCompat="@drawable/ic_add" />
 
     <Spinner
         android:id="@+id/numberSpinner"
