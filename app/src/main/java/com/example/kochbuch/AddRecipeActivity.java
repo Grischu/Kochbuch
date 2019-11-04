@@ -85,6 +85,8 @@ public class AddRecipeActivity extends AppCompatActivity {
             ingredients = adapter.getName();
         }
 
+        //TODO Validate ingredients
+
         RecipeIngredients recipeIngredients = new RecipeIngredients(ingredients);
 
 

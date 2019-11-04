@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Database(entities = {Recipe.class}, version = 21)
+@Database(entities = {Recipe.class}, version = 22)
 public abstract class RecipeDatabase extends RoomDatabase {
 
     private static RecipeDatabase instance;
