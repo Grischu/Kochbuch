@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -74,36 +73,7 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK) {
             String title = data.getStringExtra(AddRecipeActivity.EXTRA_TITLE); //Should never be null
             String description = data.getStringExtra(AddRecipeActivity.EXTRA_DESCRIPTION);
-
-            List<Ingredients> ingredientsList = new ArrayList<>();
-            Ingredients ingredients = new Ingredients();
-            ingredients.setName("Mehl");
-            ingredients.setAmount(1);
-            ingredients.setUnit("KG");
-            Ingredients ingredients1 = new Ingredients();
-            ingredients1.setName("Mehl");
-            ingredients1.setAmount(1);
-            ingredients1.setUnit("KG");
-            Ingredients ingredients2 = new Ingredients();
-            ingredients2.setName("Mehl");
-            ingredients2.setAmount(1);
-            ingredients2.setUnit("KG");
-            Ingredients ingredients3 = new Ingredients();
-            ingredients3.setName("Mehl");
-            ingredients3.setAmount(1);
-            ingredients3.setUnit("KG");
-            Ingredients ingredients4 = new Ingredients();
-            ingredients4.setName("Mehl");
-            ingredients4.setAmount(1);
-            ingredients4.setUnit("KG");
-
-            ingredientsList.add(ingredients);
-            ingredientsList.add(ingredients1);
-            ingredientsList.add(ingredients2);
-            ingredientsList.add(ingredients3);
-            ingredientsList.add(ingredients4);
-
-            RecipeIngredients recipeIngredients = new RecipeIngredients(ingredientsList);
+            RecipeIngredients recipeIngredients = (RecipeIngredients) data.getSerializableExtra("RecipeIngredients");
 
             Recipe recipe = new Recipe(title, description, 2,2,R.drawable.testpicture, recipeIngredients); //TODO Picture Uploader
             recipeViewModel.insert(recipe);

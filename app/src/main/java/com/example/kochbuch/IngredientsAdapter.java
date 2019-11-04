@@ -133,6 +133,11 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         }
     }
 
+    public void addData(){
+        name.add(new Ingredients());
+        notifyDataSetChanged();
+    }
+
 
 
     public interface OnItemClickListener {

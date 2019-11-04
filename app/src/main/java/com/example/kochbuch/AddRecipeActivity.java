@@ -9,8 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddRecipeActivity extends AppCompatActivity {
 
@@ -31,13 +35,8 @@ public class AddRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_recipe);
 
         recyclerView = findViewById(R.id.ingredients_recycler_view);
-
         editTextTitle = findViewById(R.id.editRecipeTitle);
         editTextDescription = findViewById(R.id.editRecipeDescription);
-
-        FloatingActionButton addIngredientsButton = findViewById(R.id.addIngredientsButton);
-
-
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
 
@@ -55,14 +54,39 @@ public class AddRecipeActivity extends AppCompatActivity {
 
             setTitle("Edit Recipe");
         } else {
+            List<Ingredients> ingredients = new ArrayList<>();
+            final IngredientsAdapter adapter = new IngredientsAdapter(ingredients);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
             setTitle("Add Recipe");
         }
+
+
+        FloatingActionButton addIngredientsButton = findViewById(R.id.addIngredientsButton);
+        addIngredientsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IngredientsAdapter adapter = (IngredientsAdapter) recyclerView.getAdapter();
+                if(adapter != null) {
+                    adapter.addData();
+                }
+            }
+        });
 
     }
 
     private void saveRecipe() {
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
+        IngredientsAdapter adapter = (IngredientsAdapter) recyclerView.getAdapter();
+        List<Ingredients> ingredients = new ArrayList<>();
+        if(adapter != null) {
+            ingredients = adapter.getName();
+        }
+
+        RecipeIngredients recipeIngredients = new RecipeIngredients(ingredients);
+
 
         //Validate
         if(title.trim().isEmpty() || description.trim().isEmpty()) {
@@ -80,6 +104,7 @@ public class AddRecipeActivity extends AppCompatActivity {
 
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
+        data.putExtra("RecipeIngredients", recipeIngredients);
 
         setResult(RESULT_OK, data);
         finish();
