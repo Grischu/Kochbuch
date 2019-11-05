@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Database(entities = {Recipe.class}, version = 24)
+@Database(entities = {Recipe.class}, version = 33)
 public abstract class RecipeDatabase extends RoomDatabase {
 
     private static RecipeDatabase instance;
@@ -63,7 +63,7 @@ public abstract class RecipeDatabase extends RoomDatabase {
 
             RecipeIngredients recipeIngredients = new RecipeIngredients(ingredientsList);
 
-            recipeDao.insert(new Recipe(
+            /*recipeDao.insert(new Recipe(
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,
@@ -98,7 +98,7 @@ public abstract class RecipeDatabase extends RoomDatabase {
                     "Test",
                     1,
                     1, //TODO Ingredients
-                    R.drawable.testpicture,1, recipeIngredients));
+                    R.drawable.testpicture,1, recipeIngredients));*/
             return null;
         }
     }

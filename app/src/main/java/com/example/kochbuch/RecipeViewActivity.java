@@ -2,6 +2,8 @@ package com.example.kochbuch;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -64,8 +66,10 @@ public class RecipeViewActivity extends AppCompatActivity {
             textTitle.setText(recipe.getTitle());
             textDescription.setText(recipe.getDescirption());
 
+            byte[] imageByte = recipe.getImage();
+            Bitmap bmp = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
+            image.setImageBitmap(bmp);
 
-            image.setImageResource(recipe.getImage());
             dropDown.setSelection(getIndex(dropDown, recipe.getNumber()));
         }
 

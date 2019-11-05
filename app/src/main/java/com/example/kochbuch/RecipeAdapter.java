@@ -1,7 +1,8 @@
 package com.example.kochbuch;
 
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,7 +31,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
     public void onBindViewHolder(@NonNull RecipeHolder recipeHolder, int i) {
         Recipe recipe = recipeList.get(i);
         recipeHolder.textViewTitle.setText(recipe.getTitle());
-        recipeHolder.imageView.setImageResource(recipe.getImage());
+
+        byte[] imageByte = recipe.getImage();
+        Bitmap bmp = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
+        recipeHolder.imageView.setImageBitmap(bmp);
     }
 
     @Override

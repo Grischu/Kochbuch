@@ -18,9 +18,9 @@ public class Recipe implements Serializable {
     private RecipeIngredients recipeIngredients;
     private int number;
 
-    private int image;
+    private byte[] image;
 
-    public Recipe(String title, String descirption, int difficulty, int time, int image, int number, RecipeIngredients recipeIngredients) {
+    public Recipe(String title, String descirption, int difficulty, int time, byte [] image, int number, RecipeIngredients recipeIngredients) {
         this.title = title;
         this.descirption = descirption;
         this.difficulty = difficulty;
@@ -50,7 +50,7 @@ public class Recipe implements Serializable {
         return time;
     }
 
-    public int getImage() {
+    public byte [] getImage() {
         return image;
     }
 
@@ -74,7 +74,7 @@ public class Recipe implements Serializable {
         this.time = time;
     }
 
-    public void setImage(int image) {
+    public void setImage(byte [] image) {
         this.image = image;
     }
 
