@@ -34,6 +34,12 @@ public class AddRecipeActivity extends AppCompatActivity {
     public static final String EXTRA_NUMBER =
             "com.example.kochbuch.NUMBER";
 
+    public static final String EXTRA_DIFFICULTY =
+            "com.example.kochbuch.DIFFICULTY";
+
+    public static final String EXTRA_TIME =
+            "com.example.kochbuch.EXTRA_TIME";
+
     public static final String EXTRA_PICTURE = "com.example.kochbuch.PICTURE";
 
     public static final int OPEN_CAMERA = 55;
@@ -43,8 +49,10 @@ public class AddRecipeActivity extends AppCompatActivity {
     private EditText editTextTitle;
     private EditText editTextDescription;
     RecyclerView recyclerView;
-    private Spinner dropDown;
+    private Spinner numberSpinner;
+    private Spinner difficultySpinner;
     private ImageView addRecipeImage;
+    private EditText editTextTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +62,10 @@ public class AddRecipeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.ingredients_recycler_view);
         editTextTitle = findViewById(R.id.editRecipeTitle);
         editTextDescription = findViewById(R.id.editRecipeDescription);
-        dropDown = findViewById(R.id.numberSpinner);
+        numberSpinner = findViewById(R.id.numberSpinner);
+        difficultySpinner = findViewById(R.id.difficultySpinner);
         addRecipeImage = findViewById(R.id.addRecipeImage);
+        editTextTime = findViewById(R.id.timeText);
 
         addRecipeImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +79,8 @@ public class AddRecipeActivity extends AppCompatActivity {
 
         Integer[] items = new Integer[]{1, 2, 3, 4, 5, 6};
         ArrayAdapter<Integer> dropDownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropDown.setAdapter(dropDownAdapter);
+        numberSpinner.setAdapter(dropDownAdapter);
+        difficultySpinner.setAdapter(dropDownAdapter);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
 
@@ -78,7 +89,9 @@ public class AddRecipeActivity extends AppCompatActivity {
             Recipe recipe = (Recipe) intent.getSerializableExtra("Recipe");
             editTextTitle.setText(recipe.getTitle());
             editTextDescription.setText(recipe.getDescirption());
-            dropDown.setSelection(getIndex(dropDown, recipe.getNumber()));
+            numberSpinner.setSelection(getIndex(numberSpinner, recipe.getNumber()));
+            difficultySpinner.setSelection(getIndex(difficultySpinner, recipe.getDifficulty()));
+            editTextTime.setText(recipe.getTime());
 
 
             byte[] imageByte = recipe.getImage();
@@ -118,7 +131,9 @@ public class AddRecipeActivity extends AppCompatActivity {
     private void saveRecipe() {
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
-        int number = (Integer) dropDown.getSelectedItem();
+        int number = (Integer) numberSpinner.getSelectedItem();
+        int difficulty = (Integer) difficultySpinner.getSelectedItem();
+        String time = editTextTime.getText().toString();
         IngredientsAdapter adapter = (IngredientsAdapter) recyclerView.getAdapter();
         List<Ingredients> ingredients = new ArrayList<>();
         if(adapter != null) {
@@ -142,7 +157,11 @@ public class AddRecipeActivity extends AppCompatActivity {
             recipe.setTitle(title);
             recipe.setDescirption(description);
             recipe.setNumber(number);
-            recipe.setImage(imageByte);
+            recipe.setDifficulty(difficulty);
+            if(imageByte != null) {
+                recipe.setImage(imageByte);
+            }
+            recipe.setTime(time);
 
             data.putExtra("Recipe", recipe);
         }
@@ -150,6 +169,8 @@ public class AddRecipeActivity extends AppCompatActivity {
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
         data.putExtra(EXTRA_NUMBER, number);
+        data.putExtra(EXTRA_DIFFICULTY, difficulty);
+        data.putExtra(EXTRA_TIME, time);
         data.putExtra(EXTRA_PICTURE, imageByte);
         data.putExtra("RecipeIngredients", recipeIngredients);
 

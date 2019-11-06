@@ -13,14 +13,14 @@ public class Recipe implements Serializable {
     private String title;
     private String descirption;
     private int difficulty;
-    private int time;
+    private String time;
     @TypeConverters(IngredientsConverter.class)
     private RecipeIngredients recipeIngredients;
     private int number;
 
     private byte[] image;
 
-    public Recipe(String title, String descirption, int difficulty, int time, byte [] image, int number, RecipeIngredients recipeIngredients) {
+    public Recipe(String title, String descirption, int difficulty, String time, byte [] image, int number, RecipeIngredients recipeIngredients) {
         this.title = title;
         this.descirption = descirption;
         this.difficulty = difficulty;
@@ -46,7 +46,7 @@ public class Recipe implements Serializable {
         return difficulty;
     }
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
@@ -70,7 +70,7 @@ public class Recipe implements Serializable {
         this.difficulty = difficulty;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

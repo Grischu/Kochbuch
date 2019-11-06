@@ -8,10 +8,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Database(entities = {Recipe.class}, version = 33)
+@Database(entities = {Recipe.class}, version = 38)
 public abstract class RecipeDatabase extends RoomDatabase {
 
     private static RecipeDatabase instance;
@@ -47,7 +44,7 @@ public abstract class RecipeDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids ) {
 
-            List<Ingredients> ingredientsList = new ArrayList<>();
+            /*List<Ingredients> ingredientsList = new ArrayList<>();
             Ingredients ingredients = new Ingredients();
             ingredients.setName("Mehl");
             ingredients.setAmount(1);
@@ -63,7 +60,7 @@ public abstract class RecipeDatabase extends RoomDatabase {
 
             RecipeIngredients recipeIngredients = new RecipeIngredients(ingredientsList);
 
-            /*recipeDao.insert(new Recipe(
+            recipeDao.insert(new Recipe(
                     "Veganer Burger mit Karotten und Hummus",
                     "Test",
                     1,

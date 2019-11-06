@@ -35,7 +35,7 @@ public class RecipeViewActivity extends AppCompatActivity {
             "com.example.kochbuch.EXTRA_IMAGE";
 
     int check = 0;
-    Spinner dropDown;
+    Spinner numberSpinner;
     int temporaryNumber;
 
 
@@ -47,11 +47,14 @@ public class RecipeViewActivity extends AppCompatActivity {
 
         TextView textTitle = findViewById(R.id.recipeTitle);
         TextView textDescription = findViewById(R.id.recipeDesc);
+        TextView textTime = findViewById(R.id.timeText);
         ImageView image = findViewById(R.id.recipeImage);
-        dropDown = findViewById(R.id.numberSpinner);
+        numberSpinner = findViewById(R.id.numberSpinner);
+        TextView difficulty = findViewById(R.id.difficultyValue);
         Integer[] items = new Integer[]{1, 2, 3, 4, 5, 6};
         ArrayAdapter<Integer> dropDownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropDown.setAdapter(dropDownAdapter);
+        numberSpinner.setAdapter(dropDownAdapter);
+
 
 
         recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
@@ -65,12 +68,14 @@ public class RecipeViewActivity extends AppCompatActivity {
 
             textTitle.setText(recipe.getTitle());
             textDescription.setText(recipe.getDescirption());
+            textTime.setText(recipe.getTime());
 
             byte[] imageByte = recipe.getImage();
             Bitmap bmp = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
             image.setImageBitmap(bmp);
 
-            dropDown.setSelection(getIndex(dropDown, recipe.getNumber()));
+            numberSpinner.setSelection(getIndex(numberSpinner, recipe.getNumber()));
+            difficulty.setText(String.valueOf(recipe.getDifficulty()));
         }
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
@@ -84,7 +89,7 @@ public class RecipeViewActivity extends AppCompatActivity {
         final IngredientsAdapter adapter = new IngredientsAdapter(recipe.getRecipeIngredients().getIngredientsList());
         recyclerView.setAdapter(adapter);
 
-        dropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        numberSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
@@ -97,11 +102,11 @@ public class RecipeViewActivity extends AppCompatActivity {
                             temporaryNumber = recipe.getNumber();
                         }
 
-                        amount = (amount / temporaryNumber) * (int) dropDown.getItemAtPosition(position);
+                        amount = (amount / temporaryNumber) * (int) numberSpinner.getItemAtPosition(position);
                         ingredients.setAmount(Math.round(amount * 10) / 10.0);
 
                     }
-                    temporaryNumber = (int) dropDown.getItemAtPosition(position);
+                    temporaryNumber = (int) numberSpinner.getItemAtPosition(position);
                     adapter.setName(ingredientsList);
                     recyclerView.setAdapter(adapter);
                 }
