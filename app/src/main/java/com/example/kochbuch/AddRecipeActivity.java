@@ -77,7 +77,7 @@ public class AddRecipeActivity extends AppCompatActivity {
             }
         });
 
-        Integer[] items = new Integer[]{1, 2, 3, 4, 5, 6};
+        Integer[] items = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ArrayAdapter<Integer> dropDownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         numberSpinner.setAdapter(dropDownAdapter);
         difficultySpinner.setAdapter(dropDownAdapter);
