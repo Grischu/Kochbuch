@@ -8,7 +8,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-@Database(entities = {Recipe.class}, version = 39)
+@Database(entities = {Recipe.class}, version = 42)
 public abstract class RecipeDatabase extends RoomDatabase {
 
     private static RecipeDatabase instance;

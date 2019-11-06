@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, RecipeViewActivity.class);
                 //Musste mit Extra gelösst werden, da es nicht aus der DB genommen werden kann von einer Aktiven Activity
                 //"cannot access database on the main thread since it may potentially lock the UI for a long period of time."
-                intent.putExtra(RecipeViewActivity.EXTRA_TITLE, recipe.getTitle());
-                intent.putExtra(RecipeViewActivity.EXTRA_IMAGR, recipe.getImage());
                 intent.putExtra("Recipe", recipe);
                 startActivityForResult(intent, SHOW_NOTE_REQUEST);
             }
@@ -89,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             recipeViewModel.update(recipe);
             Toast.makeText(this, "Recipe updated", Toast.LENGTH_SHORT).show();
 
-        } */else {
+        } */else if(requestCode == EDIT_NOTE_REQUEST || requestCode == ADD_NOTE_REQUEST) {
             Toast.makeText(this, "Recipe not saved", Toast.LENGTH_SHORT).show();
         }
     }

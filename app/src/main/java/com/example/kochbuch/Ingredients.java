@@ -10,7 +10,8 @@ public class Ingredients implements Serializable {
     private String name; //TODO in IngredientsType auslagern mit stammdaten für dropdown
     private String unit; //TODO in IngredientsType auslagern mit stammdaten für dropdown
 
-    public double getAmount() {
+    //Double for Null-Check in Validator
+    public Double getAmount() {
         return amount;
     }
 

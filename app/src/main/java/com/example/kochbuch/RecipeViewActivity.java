@@ -25,19 +25,11 @@ import java.util.List;
 public class RecipeViewActivity extends AppCompatActivity {
 
     private RecipeViewModel recipeViewModel;
-    //private final IngredientsAdapter ingredientsAdapter = new IngredientsAdapter();
     private Recipe recipe;
-
-    public static final String EXTRA_TITLE =
-            "com.example.kochbuch.EXTRA_TITLE";
-
-    public static final String EXTRA_IMAGR =
-            "com.example.kochbuch.EXTRA_IMAGE";
 
     int check = 0;
     Spinner numberSpinner;
     int temporaryNumber;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +43,7 @@ public class RecipeViewActivity extends AppCompatActivity {
         ImageView image = findViewById(R.id.recipeImage);
         numberSpinner = findViewById(R.id.numberSpinner);
         TextView difficulty = findViewById(R.id.difficultyValue);
-        Integer[] items = new Integer[]{1, 2, 3, 4, 5, 6};
+        Integer[] items = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ArrayAdapter<Integer> dropDownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         numberSpinner.setAdapter(dropDownAdapter);
 
@@ -168,11 +160,11 @@ public class RecipeViewActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, RecipeViewActivity.class);
             intent.putExtra("Recipe", recipe);
-            startActivityForResult(intent, MainActivity.SHOW_NOTE_REQUEST);
+            startActivityForResult(intent, MainActivity.EDIT_NOTE_REQUEST);
 
             startActivity(intent);
 
-        } else {
+        } else if(requestCode == MainActivity.EDIT_NOTE_REQUEST){
             Toast.makeText(this, "Recipe not saved", Toast.LENGTH_SHORT).show();
         }
     }

@@ -150,6 +150,27 @@ public class AddRecipeActivity extends AppCompatActivity {
             Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show();
             return;
         }
+        if(time.isEmpty()) {
+            Toast.makeText(this, "Please insert a time", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(ingredients.size() == 0) {
+            Toast.makeText(this, "Please insert ingredients", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        for(Ingredients ingredientsObj : ingredients) {
+            if(ingredientsObj.getName().trim().isEmpty() || ingredientsObj.getUnit().trim().isEmpty()) {
+                Toast.makeText(this, "Please insert values for all ingrediences", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        if(imageByte == null &! getIntent().hasExtra("Recipe")) {
+            Toast.makeText(this, "Please insert a image", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //number, difficulty, time, ingredience, picture
 
         Intent data = new Intent();
         if(getIntent().hasExtra("Recipe")) {
@@ -211,7 +232,6 @@ public class AddRecipeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == OPEN_CAMERA) {
             if(resultCode == RESULT_OK) {
-
                 Bitmap bmp = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
