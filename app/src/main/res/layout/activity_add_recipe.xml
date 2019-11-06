@@ -37,73 +37,80 @@
             app:layout_constraintTop_toBottomOf="@+id/editRecipeTitle"
             app:layout_constraintVertical_bias="0.04" />
 
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ingredients_recycler_view" />
+
         <EditText
             android:id="@+id/editRecipeDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_width="364dp"
+            android:layout_height="178dp"
             android:hint="Description"
             android:inputType="textMultiLine"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addRecipeImage" />
+            app:layout_constraintTop_toBottomOf="@+id/descriptionTextView" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/ingredients_recycler_view"
-            android:layout_width="396dp"
-            android:layout_height="288dp"
-            android:layout_marginTop="48dp"
+            android:layout_width="368dp"
+            android:layout_height="195dp"
             android:scrollbars="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editRecipeDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/ingredienceLegendTextView" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/addIngredientsButton"
-            android:layout_width="68dp"
-            android:layout_height="56dp"
+            android:layout_width="37dp"
+            android:layout_height="32dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_margin="8dp"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="4dp"
+            app:fabCustomSize="33dp"
+            app:layout_constraintBottom_toTopOf="@+id/ingredients_recycler_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.985"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ingredients_recycler_view"
             app:srcCompat="@drawable/ic_add" />
 
         <Spinner
             android:id="@+id/numberSpinner"
-            android:layout_width="125dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="44dp"
+            android:layout_width="88dp"
+            android:layout_height="34dp"
             android:layout_marginEnd="124dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.956"
+            app:layout_constraintHorizontal_bias="0.069"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ingredients_recycler_view" />
+            app:layout_constraintTop_toBottomOf="@+id/personsTextView" />
 
         <Spinner
             android:id="@+id/difficultySpinner"
-            android:layout_width="125dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="124dp"
+            android:layout_width="79dp"
+            android:layout_height="33dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.956"
+            app:layout_constraintHorizontal_bias="0.391"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/numberSpinner" />
+            app:layout_constraintTop_toBottomOf="@+id/difficultyTextView" />
 
         <EditText
             android:id="@+id/timeText"
-            android:layout_width="139dp"
-            android:layout_height="25dp"
+            android:layout_width="109dp"
+            android:layout_height="41dp"
             android:ems="10"
             android:inputType="time"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.956"
+            app:layout_constraintHorizontal_bias="0.865"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/difficultySpinner" />
+            app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
 
         <TextView
             android:id="@+id/pictureText"
@@ -115,6 +122,60 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/addRecipeImage" />
 
+        <TextView
+            android:id="@+id/personsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="304dp"
+            android:text="Persons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addRecipeImage" />
+
+        <TextView
+            android:id="@+id/difficultyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="116dp"
+            android:layout_marginTop="24dp"
+            android:text="Difficulty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addRecipeImage" />
+
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="232dp"
+            android:layout_marginTop="24dp"
+            android:text="Time(minutes)"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addRecipeImage" />
+
+        <TextView
+            android:id="@+id/ingrediencesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Ingrediences"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/difficultySpinner" />
+
+        <TextView
+            android:id="@+id/ingredienceLegendTextView"
+            android:layout_width="375dp"
+            android:layout_height="20dp"
+            android:text="Name | Amount | Unit"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ingrediencesTextView" />
 
 
     </android.support.constraint.ConstraintLayout>
