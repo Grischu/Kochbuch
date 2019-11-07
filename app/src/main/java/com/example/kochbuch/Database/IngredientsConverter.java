@@ -1,6 +1,9 @@
-package com.example.kochbuch;
+package com.example.kochbuch.Database;
 
 import android.arch.persistence.room.TypeConverter;
+
+import com.example.kochbuch.Model.Ingredients;
+import com.example.kochbuch.Model.RecipeIngredients;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.example.kochbuch;
+package com.example.kochbuch.Activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,6 +18,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.kochbuch.Adapter.IngredientsAdapter;
+import com.example.kochbuch.Model.Ingredients;
+import com.example.kochbuch.Model.Recipe;
+import com.example.kochbuch.Model.RecipeIngredients;
+import com.example.kochbuch.R;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -114,7 +120,6 @@ public class AddRecipeActivity extends AppCompatActivity {
             setTitle("Add Recipe");
         }
 
-
         FloatingActionButton addIngredientsButton = findViewById(R.id.addIngredientsButton);
         addIngredientsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,9 +144,6 @@ public class AddRecipeActivity extends AppCompatActivity {
         if(adapter != null) {
             ingredients = adapter.getName();
         }
-
-        //TODO Validate ingredients
-
         RecipeIngredients recipeIngredients = new RecipeIngredients(ingredients);
 
 
@@ -170,7 +172,6 @@ public class AddRecipeActivity extends AppCompatActivity {
             Toast.makeText(this, "Please insert a image", Toast.LENGTH_SHORT).show();
             return;
         }
-        //number, difficulty, time, ingredience, picture
 
         Intent data = new Intent();
         if(getIntent().hasExtra("Recipe")) {

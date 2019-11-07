@@ -1,6 +1,5 @@
-package com.example.kochbuch;
+package com.example.kochbuch.Adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -11,12 +10,16 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.kochbuch.Activity.RecipeViewActivity;
+import com.example.kochbuch.Model.Ingredients;
+import com.example.kochbuch.Model.Recipe;
+import com.example.kochbuch.R;
+
 import java.util.List;
 
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.IngredientsHolder> {
     private List<Ingredients> name;
     private OnItemClickListener listener;
-    private Context context;
 
     public IngredientsAdapter(List<Ingredients> dataSet) {
         name = dataSet;
@@ -47,18 +50,11 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         return name.size();
     }
 
-    /*public void setRecipe(List<Recipe> recipe) {
-        this.recipeList = recipe;
-        notifyDataSetChanged(); //TODO Maybe replace with more efficent
-    }*/
-
-
     class IngredientsHolder extends RecyclerView.ViewHolder {
         private EditText editTextName;
         private EditText editTextAmount;
         private EditText editTextUnit;
         private ImageView imageViewRemove;
-        //private ImageView imageView;
 
         public IngredientsHolder(View itemView, boolean disabled) {
             super(itemView);
@@ -135,7 +131,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
                 }
             });
 
-
+            //Check if Edit or View
             if(disabled) {
                 editTextName.setEnabled(false);
                 editTextAmount.setEnabled(false);
@@ -178,10 +174,5 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     public void setName(List<Ingredients> name) {
         this.name = name;
     }
-
-    //TODO irgendwas, dass nach der mengenänderung und dann beim edit klick die werte nicht übernommen werden
-    /*public void setAmount(int amount) {
-        RecipeHolder.editTextAmount.setText(String.valueOf(ingredients.getAmount()));
-    }*/
 
 }

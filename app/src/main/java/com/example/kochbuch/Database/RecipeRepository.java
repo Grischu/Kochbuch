@@ -1,8 +1,10 @@
-package com.example.kochbuch;
+package com.example.kochbuch.Database;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+
+import com.example.kochbuch.Model.Recipe;
 
 import java.util.List;
 

@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".RecipeViewActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".Activity.RecipeViewActivity"
+            android:parentActivityName=".Activity.MainActivity" />
         <activity
-            android:name=".AddRecipeActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".Activity.AddRecipeActivity"
+            android:parentActivityName=".Activity.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

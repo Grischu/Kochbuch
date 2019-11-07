@@ -1,4 +1,4 @@
-package com.example.kochbuch;
+package com.example.kochbuch.Activity;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -19,6 +19,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.kochbuch.Adapter.IngredientsAdapter;
+import com.example.kochbuch.Database.RecipeViewModel;
+import com.example.kochbuch.Model.Ingredients;
+import com.example.kochbuch.Model.Recipe;
+import com.example.kochbuch.R;
 
 import java.util.List;
 
@@ -46,16 +52,11 @@ public class RecipeViewActivity extends AppCompatActivity {
         Integer[] items = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ArrayAdapter<Integer> dropDownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         numberSpinner.setAdapter(dropDownAdapter);
-
-
-
         recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
 
         Intent intent = getIntent();
 
         if (intent.hasExtra("Recipe")) {
-
-
             recipe = (Recipe) intent.getSerializableExtra("Recipe");
 
             textTitle.setText(recipe.getTitle());
@@ -72,7 +73,6 @@ public class RecipeViewActivity extends AppCompatActivity {
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Recipe");
-
 
         final RecyclerView recyclerView = findViewById(R.id.ingredients_recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -106,6 +106,7 @@ public class RecipeViewActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
+                //No code needed
             }
 
         });
@@ -137,7 +138,6 @@ public class RecipeViewActivity extends AppCompatActivity {
                 recipeViewModel.delete(recipe);
                 Intent myIntent = new Intent(this, MainActivity.class);
                 startActivity(myIntent);
-                //TODO Intent extra toast "deleted"
                 return true;
             case R.id.edit_recipe:
                 Intent editIntent = new Intent(this, AddRecipeActivity.class);

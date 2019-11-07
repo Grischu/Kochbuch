@@ -1,6 +1,5 @@
-package com.example.kochbuch;
+package com.example.kochbuch.Adapter;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
@@ -11,13 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.kochbuch.Model.Recipe;
+import com.example.kochbuch.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHolder> {
     private List<Recipe> recipeList = new ArrayList<>();
     private OnItemClickListener listener;
-    private Context context;
 
     @NonNull
     @Override
@@ -44,7 +45,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
     public void setRecipe(List<Recipe> recipe) {
         this.recipeList = recipe;
-        notifyDataSetChanged(); //TODO Maybe replace with more efficent
+        notifyDataSetChanged();
     }
 
 

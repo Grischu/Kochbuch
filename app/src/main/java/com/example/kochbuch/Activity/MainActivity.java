@@ -1,4 +1,4 @@
-package com.example.kochbuch;
+package com.example.kochbuch.Activity;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -11,6 +11,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.kochbuch.Adapter.RecipeAdapter;
+import com.example.kochbuch.Database.RecipeViewModel;
+import com.example.kochbuch.Model.Recipe;
+import com.example.kochbuch.Model.RecipeIngredients;
+import com.example.kochbuch.R;
 
 import java.util.List;
 
@@ -56,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Recipe recipe) {
                 Intent intent = new Intent(MainActivity.this, RecipeViewActivity.class);
-                //Musste mit Extra gelösst werden, da es nicht aus der DB genommen werden kann von einer Aktiven Activity
+                //Had to be solved with Extra, because it can not be taken from the DB from a active activity
                 //"cannot access database on the main thread since it may potentially lock the UI for a long period of time."
                 intent.putExtra("Recipe", recipe);
                 startActivityForResult(intent, SHOW_NOTE_REQUEST);
@@ -77,17 +83,11 @@ public class MainActivity extends AppCompatActivity {
             byte[] picture = data.getByteArrayExtra(AddRecipeActivity.EXTRA_PICTURE);
             RecipeIngredients recipeIngredients = (RecipeIngredients) data.getSerializableExtra("RecipeIngredients");
 
-            Recipe recipe = new Recipe(title, description, difficulty,time, picture, number, recipeIngredients); //TODO Picture Uploader
+            Recipe recipe = new Recipe(title, description, difficulty,time, picture, number, recipeIngredients);
             recipeViewModel.insert(recipe);
 
             Toast.makeText(this, "Recipe saved", Toast.LENGTH_SHORT).show();
-        } /*else if(requestCode == EDIT_NOTE_REQUEST && resultCode == RESULT_OK) {
-
-            Recipe recipe = (Recipe) data.getSerializableExtra("Recipe");
-            recipeViewModel.update(recipe);
-            Toast.makeText(this, "Recipe updated", Toast.LENGTH_SHORT).show();
-
-        } */else if(requestCode == EDIT_NOTE_REQUEST || requestCode == ADD_NOTE_REQUEST) {
+        } else if(requestCode == EDIT_NOTE_REQUEST || requestCode == ADD_NOTE_REQUEST) {
             Toast.makeText(this, "Recipe not saved", Toast.LENGTH_SHORT).show();
         }
     }

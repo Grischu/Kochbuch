@@ -1,8 +1,10 @@
-package com.example.kochbuch;
+package com.example.kochbuch.Model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
+
+import com.example.kochbuch.Database.IngredientsConverter;
 
 import java.io.Serializable;
 
