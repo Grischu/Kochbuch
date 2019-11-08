@@ -94,8 +94,8 @@
 
         <Spinner
             android:id="@+id/difficultySpinner"
-            android:layout_width="79dp"
-            android:layout_height="33dp"
+            android:layout_width="94dp"
+            android:layout_height="39dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.391"
             app:layout_constraintStart_toStartOf="parent"
